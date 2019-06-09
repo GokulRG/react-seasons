@@ -1,15 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import SeasonsDisplay from './SeasonsDisplay';
 
 class App extends React.Component {
 
     //State Initialization outside the constructor eliminates the need for a constructor, unless you need to 
     //have any other code within the constructor apart from super(props) and state initialization.
-    state = { lat: null, long: null, errorMessage: '' };
+    state = { lat: null, errorMessage: '' };
 
     componentDidMount() {
         window.navigator.geolocation.getCurrentPosition(
-            position => this.setState({ lat: position.coords.latitude, long: position.coords.longitude }),
+            position => this.setState({ lat: position.coords.latitude}),
             error => this.setState({ errorMessage: error.message })
         );
     }
@@ -23,16 +24,15 @@ class App extends React.Component {
         //Adding Conditional Rendering
         // Render only location info when available
         //Else only error if available
-        if (this.state.lat && this.state.long && !this.state.errorMessage) {
+        if (this.state.lat && !this.state.errorMessage) {
             return (
                 <div>
-                    <span>Latitude :  {this.state.lat}</span> <br />
-                    <span>Longitude : {this.state.long}</span> <br />  
+                    <SeasonsDisplay lat={this.state.lat}/>
                 </div>
             );
         }
 
-        if (!this.state.lat && !this.state.long && this.state.errorMessage) {
+        if (!this.state.lat && this.state.errorMessage) {
             return (
                 <div>
                     <span> Error : <span style={{color:'red'}}>{this.state.errorMessage}</span></span>
