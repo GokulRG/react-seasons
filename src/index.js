@@ -9,16 +9,12 @@ class App extends React.Component {
         //This is the only time when you will directly manipulate the 
         //state object without calling setState.
         this.state = { lat: null, long: null, errorMessage: '' };
+    }
 
+    componentDidMount() {
         window.navigator.geolocation.getCurrentPosition(
-            (position) => {
-                this.setState({ lat: position.coords.latitude, long: position.coords.longitude });
-            },
-            (error) => {
-                //Graceful error handling.
-                console.log(error);
-                this.setState({ errorMessage: error.message });
-            }
+            position => this.setState({ lat: position.coords.latitude, long: position.coords.longitude }),
+            error => this.setState({ errorMessage: error.message })
         );
     }
 
