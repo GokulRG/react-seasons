@@ -3,13 +3,9 @@ import ReactDOM from 'react-dom';
 
 class App extends React.Component {
 
-    constructor(props) {
-        super(props);
-
-        //This is the only time when you will directly manipulate the 
-        //state object without calling setState.
-        this.state = { lat: null, long: null, errorMessage: '' };
-    }
+    //State Initialization outside the constructor eliminates the need for a constructor, unless you need to 
+    //have any other code within the constructor apart from super(props) and state initialization.
+    state = { lat: null, long: null, errorMessage: '' };
 
     componentDidMount() {
         window.navigator.geolocation.getCurrentPosition(
