@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import SeasonsDisplay from './SeasonsDisplay';
+import Spinner from './Spinner';
 
 class App extends React.Component {
 
@@ -40,7 +41,7 @@ class App extends React.Component {
             );
         }
 
-        return <span> Loading .....</span>
+        return <Spinner />
     }
 }
 
